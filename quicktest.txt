@@ -1,0 +1,21 @@
+{
+    "SourceName" : "Indore",
+    "DestinationName" : "Mumbai",
+    "CabOwnerName" : "Naveed"
+}
+
+{
+    "email" : "varun@gmail.com",
+    "password" : "password"
+}
+
+{
+   "CurrentLocation" : "Indore",
+   "NearByRange" : 100
+}
+
+{
+  "nickname" : "asif",
+  "email" : "asif@gmail.com",
+  "password" :"new password"
+} 
