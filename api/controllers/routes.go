@@ -1,0 +1,28 @@
+package controllers
+
+import "github.com/asifk1997/uber_like_api/api/middlewares"
+
+func (s *Server) initializeRoutes() {
+
+	// Home Route
+	s.Router.HandleFunc("/", middlewares.SetMiddlewareJSON(s.Home)).Methods("GET")
+
+	// Login Route
+	s.Router.HandleFunc("/login", middlewares.SetMiddlewareJSON(s.Login)).Methods("POST")
+
+	//Users routes
+	s.Router.HandleFunc("/users", middlewares.SetMiddlewareJSON(s.CreateUser)).Methods("POST")
+	s.Router.HandleFunc("/users", middlewares.SetMiddlewareJSON(s.GetUsers)).Methods("GET")
+	s.Router.HandleFunc("/users/{id}", middlewares.SetMiddlewareJSON(s.GetUser)).Methods("GET")
+	s.Router.HandleFunc("/users/{id}", middlewares.SetMiddlewareJSON(middlewares.SetMiddlewareAuthentication(s.UpdateUser))).Methods("PUT")
+	s.Router.HandleFunc("/users/{id}", middlewares.SetMiddlewareAuthentication(s.DeleteUser)).Methods("DELETE")
+
+	//Get Nearby Cab Route
+	s.Router.HandleFunc("/cabnearby", middlewares.SetMiddlewareJSON(s.GetNearbyCabs)).Methods("GET")
+	// Create a New Booking Route
+	s.Router.HandleFunc("/bookings", middlewares.SetMiddlewareJSON(middlewares.SetMiddlewareAuthentication(s.CreateBooking))).Methods("POST")
+	// Get All the Bookings Route
+	s.Router.HandleFunc("/bookings", middlewares.SetMiddlewareJSON(middlewares.SetMiddlewareAuthentication(s.GetBookingsForUser))).Methods("GET")
+	// Find a booking by id
+	s.Router.HandleFunc("/bookings/{id}", middlewares.SetMiddlewareJSON(middlewares.SetMiddlewareAuthentication(s.GetBooking))).Methods("GET")
+}
